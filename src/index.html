@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QWERKYLAND</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff8800);
+      background-size: 400% 400%;
+      animation: rainbowBG 10s ease infinite;
+      color: #000;
+    }
+
+    @keyframes rainbowBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .sidebar {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 200px;
+      background-color: #ff66cc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+      box-shadow: -5px 0 10px rgba(0,0,0,0.3);
+    }
+
+    .sidebar button {
+      margin: 20px 0;
+      padding: 15px;
+      width: 150px;
+      border: none;
+      border-radius: 10px;
+      background-color: #00ffcc;
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.3s;
+    }
+
+    .sidebar button:hover {
+      background-color: #ffdd00;
+      transform: rotate(5deg) scale(1.1);
+    }
+
+    .content {
+      margin-right: 200px;
+      padding: 40px;
+    }
+
+    .crazy-title {
+      font-size: 48px;
+      text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff;
+      transform: rotate(-5deg);
+    }
+
+    .dancing-unicorn {
+      width: 100px;
+      animation: spin 5s linear infinite;
+      display: block;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('about')">About Us</button>
+    <button onclick="showPage('contact')">Contact Us</button>
+  </div>
+
+  <div class="content">
+    <div id="home" class="page">
+      <h1 class="crazy-title">Welcome to QWERKYLAND!</h1>
+      <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" class="dancing-unicorn" alt="Spinning Unicorn">
+      <p>This is the place where colors clash, buttons bounce, and logic does the cha-cha.</p>
+    </div>
+
+    <div id="about" class="page" style="display:none">
+      <h1 class="crazy-title">About Us</h1>
+      <p>We're a bunch of quirky squirrels that escaped the ordinary. We like glitter, llamas, and neon pickles.</p>
+    </div>
+
+    <div id="contact" class="page" style="display:none">
+      <h1 class="crazy-title">Contact Us</h1>
+      <p>Send us a message via rainbow pigeon or use <a href="mailto:qwerky@rainbow.net">qwerky@rainbow.net</a>.</p>
+    </div>
+  </div>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+      document.getElementById(pageId).style.display = 'block';
+    }
+  </script>
+</body>
+</html>
