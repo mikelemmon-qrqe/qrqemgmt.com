@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QrQe Mgmt 🌀</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00);
+      background-size: 600% 600%;
+      animation: bgDance 10s infinite alternate;
+      color: #1a1a1a;
+      overflow-x: hidden;
+    }
+
+    @keyframes bgDance {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    header {
+      padding: 2rem;
+      text-align: center;
+      color: #fff;
+      text-shadow: 2px 2px 0 #000;
+      font-size: 3rem;
+      transform: rotate(-3deg);
+    }
+
+    .nav-right {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .nav-right button {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      background-color: #00ff99;
+      border: 2px dotted #000;
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #000;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .nav-right button:hover {
+      background-color: #ff66cc;
+      color: #fff;
+      transform: rotate(360deg);
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.8);
+      border: 5px dashed #ff4500;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      animation: wobble 4s infinite;
+    }
+
+    @keyframes wobble {
+      0%, 100% { transform: rotate(1deg); }
+      50% { transform: rotate(-1deg); }
+    }
+
+    .upload-btn {
+      background: #ff1493;
+      color: #fff;
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+      border: 4px double #000;
+      border-radius: 15px;
+      cursor: pointer;
+      margin-top: 2rem;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .upload-btn:hover {
+      transform: scale(1.1) rotate(5deg);
+      background: #00ffff;
+      color: #000;
+    }
+
+    #videoPlayer {
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 100%;
+      border: 4px groove #ff00ff;
+      border-radius: 10px;
+      display: none;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>QrQe Mgmt Website</header>
+
+  <div class="nav-right">
+    <button onclick="alert('This is Home! 🎈')">Home</button>
+    <button onclick="alert('We are mysterious! 🤪')">About Us</button>
+    <button onclick="alert('Call us via 🛸 radio signals!')">Contact Us</button>
+  </div>
+
+  <main>
+    <h2>👾 Upload your weirdest video here!</h2>
+    <label for="videoInput" class="upload-btn">🛸 Beam it up!</label>
+    <input type="file" id="videoInput" accept="video/*">
+
+    <video id="videoPlayer" controls></video>
+  </main>
+
+  <script>
+    const videoInput = document.getElementById('videoInput');
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    videoInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        const url = URL.createObjectURL(file);
+        videoPlayer.src = url;
+        videoPlayer.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
