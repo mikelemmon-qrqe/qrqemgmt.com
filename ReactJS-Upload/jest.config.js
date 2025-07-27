@@ -1,11 +1,6 @@
-module.exports = {
-  testMatch: [
-    "**/__tests__/**/*.js?(x)",
-    "**/?(*.)+(spec|test).js?(x)"
-  ],
-  testPathIgnorePatterns: [
-    "/node_modules/",
-    "/dist/",
-    "/build/"
-  ]
+/** @returns {Promise<import('jest').Config>} */
+module.exports = async () => {
+  return {
+    verbose: true,
+  };
 };
