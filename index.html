@@ -176,54 +176,7 @@
   </div>
   <!-- Render React App  -->
   <div id="root"></div>
-
-
-  <!-- Firebase Video Upload Script -->
-  <script>
-    const form = document.getElementById("uploadForm");
-    const videoInput = document.getElementById("videoFile");
-    const videoTitle = document.getElementById("videoTitle");
-    const status = document.getElementById("status");
-    const progressBar = document.getElementById("uploadProgress");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const file = videoInput.files[0];
-    const title = videoTitle.value.trim();
-
-    if (!file || !title) {
-      alert("Please select a video and enter a title.");
-      return;
-    }
-
-    const storageRef = storage.ref(`videos/${Date.now()}_${file.name}`);
-    const uploadTask = storageRef.put(file);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        progressBar.value = progress;
-        status.textContent = `Uploading: ${Math.round(progress)}%`;
-      },
-      (error) => {
-        console.error("Upload failed:", error);
-        status.textContent = "Upload failed. 😢";
-      },
-      async () => {
-        const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
-        await db.collection("videos").add({
-          title,
-          url: downloadURL,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        status.textContent = "Upload complete! 🎉";
-        form.reset();
-        progressBar.value = 0;
-      }
-    );
-  });
-</script>
+  <!-- React app bundle -->
+  <script src="static/js/main.9156c2cf.js"></script>
 </body>
 </html>
