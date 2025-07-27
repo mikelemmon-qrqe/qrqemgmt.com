@@ -1,6 +1,11 @@
-/** @type {import('jest').Config} */
-const config = {
-  verbose: true,
+module.exports = {
+  testMatch: [
+    "**/__tests__/**/*.js?(x)",
+    "**/?(*.)+(spec|test).js?(x)"
+  ],
+  testPathIgnorePatterns: [
+    "/node_modules/",
+    "/dist/",
+    "/build/"
+  ]
 };
-
-module.exports = config;
