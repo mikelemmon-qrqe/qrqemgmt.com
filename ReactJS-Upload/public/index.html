@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QrQe Mgmt</title>
-  <style>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+      <style>
     body {
       margin: 0;
       font-family: 'Comic Sans MS', cursive, sans-serif;
@@ -139,9 +155,9 @@
     padding: 2rem;
 }
   </style>
-</head>
-<body>
-  <div class="sidebar">
+  </head>
+  <body>
+      <div class="sidebar">
     <button onclick="showPage('home')">Home</button>
     <button onclick="showPage('about')">About Us</button>
     <button onclick="showPage('contact')">Contact Us</button>
@@ -167,63 +183,15 @@
     
     <main>
       <h2>👾 Upload your weirdest video here!</h2>
+      <br>
       <label for="videoInput" class="upload-btn">🛸 Beam it up!</label>
       <input type="file" id="videoInput" accept="video/*">
 
       <video id="videoPlayer" controls></video>
     </main>
+    <br><br>
+    <div id="root"></div>
   
   </div>
-  <!-- Render React App  -->
-  <div id="root"></div>
-
-
-  <!-- Firebase Video Upload Script -->
-  <script>
-    const form = document.getElementById("uploadForm");
-    const videoInput = document.getElementById("videoFile");
-    const videoTitle = document.getElementById("videoTitle");
-    const status = document.getElementById("status");
-    const progressBar = document.getElementById("uploadProgress");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const file = videoInput.files[0];
-    const title = videoTitle.value.trim();
-
-    if (!file || !title) {
-      alert("Please select a video and enter a title.");
-      return;
-    }
-
-    const storageRef = storage.ref(`videos/${Date.now()}_${file.name}`);
-    const uploadTask = storageRef.put(file);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        progressBar.value = progress;
-        status.textContent = `Uploading: ${Math.round(progress)}%`;
-      },
-      (error) => {
-        console.error("Upload failed:", error);
-        status.textContent = "Upload failed. 😢";
-      },
-      async () => {
-        const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
-        await db.collection("videos").add({
-          title,
-          url: downloadURL,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        status.textContent = "Upload complete! 🎉";
-        form.reset();
-        progressBar.value = 0;
-      }
-    );
-  });
-</script>
-</body>
+  </body>
 </html>
