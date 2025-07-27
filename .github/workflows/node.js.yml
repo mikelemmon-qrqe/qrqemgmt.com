@@ -26,6 +26,19 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        working-directory: ReactJS-Upload
+
+    - name: Install dependencies
+      run: npm ci
+      working-directory: ReactJS-Upload
+
+    - name: Build
+      run: npm run build --if-present
+      working-directory: ReactJS-Upload
+
+    - name: Test
+      run: npm test
+      working-directory: ReactJS-Upload
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
