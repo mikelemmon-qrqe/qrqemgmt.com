@@ -18,7 +18,7 @@
     "deploy": "gh-pages -d build",
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
     "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --config=jest.config.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
