@@ -9,7 +9,7 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAmgVdJoLNl1muRcaJoCfPnJD_jXkKaXbQ",
+  apiKey: process.env.FIREBASE_API_KEY, // Use environment variable for API key
   authDomain: "qrqe-mgmt---video-submission.firebaseapp.com",
   projectId: "qrqe-mgmt---video-submission",
   storageBucket: "qrqe-mgmt---video-submission.firebasestorage.app",
