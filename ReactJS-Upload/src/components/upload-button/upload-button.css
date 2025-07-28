@@ -11,6 +11,7 @@
 
 .uploadButton:hover{
     background-color: lightgray;
+    cursor: pointer;
 }
 
 .uploadButton:active{
