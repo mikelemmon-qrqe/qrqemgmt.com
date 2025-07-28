@@ -56,7 +56,7 @@ function App() {
     return (
         <div className="box">
             <h2 className="header">
-                React drop files input
+            Upload your videos here
             </h2>
             <DropFileInput
                 onFileChange={(files) => onFileChange(files)}
