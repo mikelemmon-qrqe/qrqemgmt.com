@@ -172,13 +172,15 @@
 
       <video id="videoPlayer" controls></video>
     </main>
-    <script>
+
+  </div>
+  <script>
     function showPage(pageId) {
       document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
       document.getElementById(pageId).style.display = 'block';
     }
   </script>
-  </div>
+  
   <!-- Render React App  -->
   <div id="root"></div>
 </body>
