@@ -6,6 +6,10 @@ import { useState } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage, db } from './firebase';
 import { doc, setDoc} from 'firebase/firestore';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import Home from "./pages/Home";
+
 
 function App() {
     const [file, setFile] = useState(null)
@@ -54,16 +58,21 @@ function App() {
     }
 
     return (
-        <div className="box">
-            <h2 className="header">
-            Upload your videos here
-            </h2>
-            <DropFileInput
-                onFileChange={(files) => onFileChange(files)}
-            />
-            <br></br>
-            <UploadButton onClick={ () => handleClick()}> </UploadButton>
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Home />} />
+            </Routes>
+        </Router>
+        // <div className="box">
+        //     <h2 className="header">
+        //     Upload your videos here
+        //     </h2>
+        //     <DropFileInput
+        //         onFileChange={(files) => onFileChange(files)}
+        //     />
+        //     <br></br>
+        //     <UploadButton onClick={ () => handleClick()}> </UploadButton>
+        // </div>
     );
 }
 
