@@ -4,12 +4,11 @@
     height: 200px;
     border: 2px dashed var(--border-color);
     border-radius: 20px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background-color: var(--input-bg);
+    margin: auto;
 }
 
 .drop-file-input input {
@@ -91,3 +90,4 @@
 .drop-file-preview__item:hover .drop-file-preview__item__del {
     opacity: 1;
 }
+

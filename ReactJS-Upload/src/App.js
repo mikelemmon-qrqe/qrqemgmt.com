@@ -1,78 +1,23 @@
 import './App.css';
 
-import DropFileInput from './components/drop-file-input/DropFileInput';
-import UploadButton from './components/upload-button/UploadButton';
-import { useState } from 'react';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { storage, db } from './firebase';
-import { doc, setDoc} from 'firebase/firestore';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/Home";
-
+import About from "./pages/About";
+import Upload from "./pages/Upload";
+import VideoBackground from './components/background/VideoBackground';
 
 function App() {
-    const [file, setFile] = useState(null)
-
-
-    const onFileChange = (files) => {
-        const currentFile = files[0];
-        setFile(currentFile)
-        console.log(files);
-    }
-
-    const uploadToDatabase = (url) => {
-        let docData = {
-            mostRecentUploadURL: url,
-            username: "qrqemgmt"
-        }
-        const userRef = doc(db, "videos", docData.username)
-        setDoc(userRef, docData, { merge: true }).then(() => {
-                console.log("File successfully Uploaded!");
-            })
-            .catch((error) => {
-                console.error("Error uploading file: ", error);
-            });
-    }
-
-    const handleClick = () => {
-        if (file === null) return;
-        const fileRef = ref(storage, `videos_submissions/${file.name}`);
-        const uploadTask = uploadBytesResumable(fileRef, file);
-
-        uploadTask.on('state_changed', (snapshot) => {
-            let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            progress = Math.trunc(progress);
-            console.log(progress)
-        }, (error) => {
-            console.log("Upload failed:", error);
-        }, () => {
-            console.log("Upload successful")
-            getDownloadURL(uploadTask.snapshot.ref).then(downloadURL =>{
-                uploadToDatabase(downloadURL);
-                console.log(downloadURL);
-            }
-
-            )
-        });
-    }
-
     return (
         <Router>
-            <Routes>
-                <Route path="/" element={<Home />} />
-            </Routes>
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/upload" element={<Upload />} />
+                </Routes>
+            <VideoBackground />
         </Router>
-        // <div className="box">
-        //     <h2 className="header">
-        //     Upload your videos here
-        //     </h2>
-        //     <DropFileInput
-        //         onFileChange={(files) => onFileChange(files)}
-        //     />
-        //     <br></br>
-        //     <UploadButton onClick={ () => handleClick()}> </UploadButton>
-        // </div>
     );
 }
 

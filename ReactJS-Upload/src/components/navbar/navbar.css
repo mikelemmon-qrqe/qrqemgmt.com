@@ -1,0 +1,29 @@
+.navbar {
+  position: absolute;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.463);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  z-index: 10;
+}
+.navbar .logo {
+  color: #fff;
+  font-size: 1.5rem;
+  padding-left: 1%
+}
+.navbar .ul {
+  list-style: none;
+  padding-right: 1%;
+  padding-top: 10px;
+  display: flex;
+  gap: 2rem;
+}
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.navbar a:hover {
+  color: #66ccff;
+}
