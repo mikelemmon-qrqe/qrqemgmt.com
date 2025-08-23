@@ -1,5 +1,11 @@
 import VideoBackground from "../components/background/VideoBackground";
 
-export default function Home() {
-  return <VideoBackground />;
+function app() {
+  return (
+    <div className="App">
+      <VideoBackground />
+    </div>
+  );
 }
+
+export default app;

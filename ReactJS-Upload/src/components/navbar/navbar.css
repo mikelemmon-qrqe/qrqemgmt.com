@@ -27,3 +27,38 @@
 .navbar a:hover {
   color: #66ccff;
 }
+.logo {
+  font-family: Arial, sans-serif;
+}
+
+.logo-q-blue {
+  color: #0000ff;
+  font-size: 35pt;
+  font-family: Arial, sans-serif;
+}
+
+.logo-r {
+  font-size: 24pt;
+  font-family: 'Lobster', cursive;
+}
+
+.logo-q-green {
+  color: #38761d;
+  font-size: 35pt;
+  font-family: Arial, sans-serif;
+}
+
+.logo-e {
+  font-size: 24pt;
+  font-family: 'Pacifico', cursive;
+}
+
+.logo-text {
+  font-size: 24pt;
+  font-family: Arial, sans-serif;
+}
+
+.logo-llc {
+  font-size: 16pt;
+  font-family: Arial, sans-serif;
+}

@@ -13,6 +13,8 @@
 .box {
     background-color: var(--box-bg);
     padding: 30px;
+    top: 125px;
+    position: relative;
     border-radius: 20px;
     box-shadow: var(--box-shadow);
     width: 500px;
@@ -24,8 +26,14 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-bottom: 30px;
-} 
+}
+
+.header-subtitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
 .about-page-header {
     display: flex;
