@@ -81,7 +81,7 @@ export default function CombinedUploadForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-4 w-full max-w-md mx-auto p-4 border rounded-lg shadow-md"
+      className="flex flex-col gap-4 w-full max-w-md mx-auto p-4 rounded-lg shadow-md"
     >
       <h1 className="text-xl font-bold text-center text-white">Submit Your Info & Video</h1>
 
@@ -124,11 +124,13 @@ export default function CombinedUploadForm() {
       />
 
       {/* Drag-and-drop file input */}
+      <div className="mt-4">
       <DropFileInput onFileChange={handleFileChange} />
+      </div>
 
       {/* Show selected file name and allow removal */}
       {file && (
-        <div className="flex items-center justify-between p-2 border rounded bg-gray-100">
+        <div className="flex items-center justify-center p-2 border rounded bg-gray-100">
           <span>{file.name}</span>
           <button
             type="button"
