@@ -15,7 +15,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/upload" element={<Upload />} />
-                    <Route path="*" element={<Navigate to='/home' replace />} />
+                    <Route path="*" element={<Navigate to='/qrqemgmt.com' replace />} />
                 </Routes>
             <VideoBackground />
         </Router>
