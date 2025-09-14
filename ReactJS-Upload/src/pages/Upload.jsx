@@ -1,4 +1,4 @@
-import CombinedUploadForm from "../components/CombinedUploadForm";
+import CombinedUploadForm from "../components/upload-form/CombinedUploadForm";
 
 function App() {
   return (

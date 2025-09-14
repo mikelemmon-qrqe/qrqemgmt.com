@@ -1,6 +1,6 @@
 import { useState } from "react";
-import DropFileInput from "../components/drop-file-input/DropFileInput";
-import { storage, db } from "../firebase";
+import DropFileInput from "../drop-file-input/DropFileInput";
+import { storage, db } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
@@ -92,7 +92,7 @@ export default function CombinedUploadForm() {
         value={formData.firstName}
         onChange={handleChange}
         required
-        className="p-2 border rounded"
+        className="p-2 border rounded w-full"
       />
       <input
         type="text"
@@ -101,7 +101,7 @@ export default function CombinedUploadForm() {
         value={formData.lastName}
         onChange={handleChange}
         required
-        className="p-2 border rounded"
+        className="p-2 border rounded  w-full"
       />
       <input
         type="email"
@@ -110,7 +110,7 @@ export default function CombinedUploadForm() {
         value={formData.email}
         onChange={handleChange}
         required
-        className="p-2 border rounded"
+        className="p-2 border rounded  w-full"
       />
       <input
         type="number"
@@ -120,7 +120,7 @@ export default function CombinedUploadForm() {
         onChange={handleChange}
         required
         min="0"
-        className="p-2 border rounded"
+        className="p-2 border rounded  w-full"
       />
 
       {/* Drag-and-drop file input */}
@@ -155,7 +155,7 @@ export default function CombinedUploadForm() {
       <button
         type="submit"
         disabled={loading}
-        className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 mt-4"
+        className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 mt-4 w-3/4"
       >
         {loading ? "Uploading..." : "Submit"}
       </button>

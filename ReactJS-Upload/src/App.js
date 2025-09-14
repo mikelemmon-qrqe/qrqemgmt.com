@@ -1,6 +1,6 @@
 import './App.css';
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -15,6 +15,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/upload" element={<Upload />} />
+                    <Route path="*" element={<Navigate to='/home' replace />} />
                 </Routes>
             <VideoBackground />
         </Router>
