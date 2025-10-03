@@ -10,7 +10,7 @@
 .navbar .logo {
   color: #fff;
   font-size: 1.5rem;
-  padding-left: 1%
+  padding-left: 1%;
 }
 .navbar .ul {
   list-style: none;
@@ -54,8 +54,10 @@
 }
 
 .logo-text {
+  color: #EA7769;
   font-size: 24pt;
   font-family: Arial, sans-serif;
+  /* font-family: 'Lobster', cursive; */
 }
 
 .logo-llc {
