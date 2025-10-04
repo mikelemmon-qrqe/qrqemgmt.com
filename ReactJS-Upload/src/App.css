@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 :root {
     --body-bg: #f5f8ff;
@@ -60,4 +63,13 @@
     color: white;
     text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
     -webkit-text-stroke: 0.5px black;
+}
+
+.optional{
+    font-family: 'Caveat', cursive;
+    text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.8);
+    color: white;
+    z-index: 1;
+    font-size: 30px;
+    font-weight: bold;
 }

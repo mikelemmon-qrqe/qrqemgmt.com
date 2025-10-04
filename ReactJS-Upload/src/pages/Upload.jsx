@@ -1,6 +1,6 @@
 import CombinedUploadForm from "../components/upload-form/CombinedUploadForm";
 
-function App() {
+function Upload() {
   return (
     <div className="App">
       <CombinedUploadForm />
@@ -8,4 +8,4 @@ function App() {
   );
 }
 
-export default App;
+export default Upload;

@@ -7,10 +7,14 @@ export default function VideoBackground({ children }) {
       <video autoPlay loop muted playsInline className="background-video">
         <source src={nightSkyVideo} type="video/mp4" />
       </video>
-      <div className="txt-overlay">
-        <p>There is no company to value -<br></br> Humans mill about here</p>
-        {children}
-      </div>
+      {children}
+      <div className="txt-overlay-1">
+        <p>There is no company to value -</p></div>
+        
+      <div className="txt-overlay-2">
+        <p>Humans mill about here</p></div>   
+      
     </div>
+
   );
 }

@@ -14,4 +14,4 @@ UploadButton.propTypes = {
     onClick: PropTypes.func
 }
 
-export default UploadButton;    
+export default UploadButton;  

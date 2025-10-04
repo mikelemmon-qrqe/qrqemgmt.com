@@ -3,13 +3,16 @@ import DropFileInput from "../drop-file-input/DropFileInput";
 import { storage, db } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import '../../App.css';
 
 export default function CombinedUploadForm() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    age: "",
+    dob: "",
+    gender: "",
+    preferredName: "",
   });
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -57,7 +60,7 @@ export default function CombinedUploadForm() {
           // Save form data + video URL to Firestore, with age as number
           const submissionData = {
             ...formData,
-            age: Number(formData.age),
+            age: new Date(formData.age),
             videoURL,
             createdAt: serverTimestamp(),
           };
@@ -112,16 +115,45 @@ export default function CombinedUploadForm() {
         required
         className="p-2 border rounded  w-full"
       />
+
       <input
-        type="number"
-        name="age"
-        placeholder="Age"
-        value={formData.age}
+        type="text"
+        name="dob"
+        placeholder="Date of Birth"
+        onFocus={(e) => (e.target.type = "date")}
+        onBlur={(e) => {
+          if (!e.target.value) e.target.type = "text";
+        }}
+        className="p-2 border rounded w-full"
+      />
+      <p className="optional">
+        Optional
+      </p>
+      <div className="w-full">
+
+      <select
+        id="gender"
+        name="gender"
+        value={formData.gender || ""}
         onChange={handleChange}
         required
-        min="0"
-        className="p-2 border rounded  w-full"
-      />
+        className="p-2 border rounded w-full bg-white text-black"
+      >
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+        <option value="Prefer not to say">Prefer not to say</option>
+      </select>
+        <input
+          type="text"
+          name="Preferred Name"
+          placeholder="Preferred Name"
+          value={formData.state}
+          onChange={handleChange}
+          className="p-2 border rounded w-1/2"
+        />
+    </div>
 
       {/* Drag-and-drop file input */}
       <div className="mt-4">
