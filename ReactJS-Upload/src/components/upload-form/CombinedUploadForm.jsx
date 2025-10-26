@@ -1,8 +1,10 @@
 import { useState } from "react";
 import DropFileInput from "../drop-file-input/DropFileInput";
-import { storage, db } from "../../firebase";
+import { storage, db, auth } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { signInAnonymously } from "firebase/auth";
+import UploadButton from "../upload-button/UploadButton";
 import '../../App.css';
 
 export default function CombinedUploadForm() {
@@ -26,20 +28,19 @@ export default function CombinedUploadForm() {
     setFile(files[0]);
   };
 
-  const handleRemoveFile = () => {
-    setFile(null);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!file) return alert("Please select a video!");
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.age)
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.dob)
       return alert("Please fill out all fields!");
 
     setLoading(true);
 
     try {
+      await signInAnonymously(auth);
+      console.log("Signed in anonymously. Proceeding with upload.");
+      console.log("Attempting to upload video to Firebase Storage...");
       const fileRef = ref(storage, `videos_submissions/${file.name}`);
       const uploadTask = uploadBytesResumable(fileRef, file);
 
@@ -57,18 +58,18 @@ export default function CombinedUploadForm() {
         async () => {
           const videoURL = await getDownloadURL(uploadTask.snapshot.ref);
 
-          // Save form data + video URL to Firestore, with age as number
+          // Save form data + video URL to Firestore, with dob as a timestamp
           const submissionData = {
             ...formData,
-            age: new Date(formData.age),
+            dob: new Date(formData.dob),
             videoURL,
-            createdAt: serverTimestamp(),
+            createdAt: serverTimestamp()
           };
-
-          await addDoc(collection(db, "submissions"), submissionData);
+          console.log("Attempting to write to Firestore Database...");
+          await addDoc(collection(db, "users"), submissionData);
 
           alert("Form and video submitted successfully!");
-          setFormData({ firstName: "", lastName: "", email: "", age: "" });
+          setFormData({ firstName: "", lastName: "", email: "", age: "", dob: "", gender: "", preferredName: "" });
           setFile(null);
           setProgress(0);
           setLoading(false);
@@ -82,12 +83,13 @@ export default function CombinedUploadForm() {
   };
 
   return (
+
     <form
       onSubmit={handleSubmit}
       className="flex flex-col gap-4 w-full max-w-md mx-auto p-4 rounded-lg shadow-md"
     >
       <h1 className="text-xl font-bold text-center text-white">Submit Your Info & Video</h1>
-
+      <div className="w-full text-center">
       <input
         type="text"
         name="firstName"
@@ -120,16 +122,19 @@ export default function CombinedUploadForm() {
         type="text"
         name="dob"
         placeholder="Date of Birth"
+        value={formData.dob}
+        onChange={handleChange}
         onFocus={(e) => (e.target.type = "date")}
         onBlur={(e) => {
           if (!e.target.value) e.target.type = "text";
         }}
         className="p-2 border rounded w-full"
       />
-      <p className="optional">
+      </div>
+      <p className="optional text-center">
         Optional
       </p>
-      <div className="w-full">
+      <div className="w-full text-center">
 
       <select
         id="gender"
@@ -145,34 +150,21 @@ export default function CombinedUploadForm() {
         <option value="Other">Other</option>
         <option value="Prefer not to say">Prefer not to say</option>
       </select>
-        <input
+      <input
           type="text"
-          name="Preferred Name"
+          name="preferredName"
           placeholder="Preferred Name"
-          value={formData.state}
+          value={formData.preferredName}
           onChange={handleChange}
-          className="p-2 border rounded w-1/2"
+          className="p-2 border rounded w-full"
         />
     </div>
 
       {/* Drag-and-drop file input */}
       <div className="mt-4">
       <DropFileInput onFileChange={handleFileChange} />
-      </div>
-
-      {/* Show selected file name and allow removal */}
-      {file && (
-        <div className="flex items-center justify-center p-2 border rounded bg-gray-100">
-          <span>{file.name}</span>
-          <button
-            type="button"
-            onClick={handleRemoveFile}
-            className="text-red-500 font-bold hover:text-red-700"
-          >
-            Remove
-          </button>
-        </div>
-      )}
+      </div><br></br>
+      <UploadButton> Upload </UploadButton>
 
       {/* Progress bar */}
       {loading && (
@@ -183,14 +175,8 @@ export default function CombinedUploadForm() {
           />
         </div>
       )}
-
-      <button
-        type="submit"
-        disabled={loading}
-        className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 mt-4 w-3/4"
-      >
-        {loading ? "Uploading..." : "Submit"}
-      </button>
     </form>
+
+    
   );
 }

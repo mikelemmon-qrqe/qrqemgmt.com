@@ -1,17 +1,22 @@
 import React from 'react';
-import './upload-button.css'
-import PropTypes from 'prop-types'
+import './upload-button.css';
+import PropTypes from 'prop-types';
 
-const UploadButton = props => {
-
-    return(
-        <div className="uploadButton" onClick={props.onClick}> Upload Button </div>
-    );
-
-}
+const UploadButton = ({ onClick, children }) => {
+  return (
+    <button
+      type="submit"
+      onClick={onClick}
+      className="uploadButton"
+    >
+      {children || "Upload"}
+    </button>
+  );
+};
 
 UploadButton.propTypes = {
-    onClick: PropTypes.func
-}
+  onClick: PropTypes.func,
+  children: PropTypes.node,
+};
 
-export default UploadButton;  
+export default UploadButton;

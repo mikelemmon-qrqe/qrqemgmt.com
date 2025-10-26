@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "video-submission-app-42454"
-  }
+    "default": "upload-app-93bb4",
+    "prod": "upload-app-93bb4"
+  },
+  "targets": {},
+  "etags": {}
 }
