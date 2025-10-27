@@ -39,6 +39,20 @@ export default function CombinedUploadForm() {
 
     try {
       await signInAnonymously(auth);
+      // Wait until onAuthStateChanged confirms the user
+      await new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged(
+          (user) => {
+            if (user) {
+              console.log("Anonymous user signed in:", user.uid);
+              unsubscribe();
+              resolve();
+            }
+          },
+          (error) => reject(error)
+        );
+      });
+
       console.log("Signed in anonymously. Proceeding with upload.");
       console.log("Attempting to upload video to Firebase Storage...");
       const fileRef = ref(storage, `videos_submissions/${file.name}`);
@@ -65,8 +79,13 @@ export default function CombinedUploadForm() {
             videoURL,
             createdAt: serverTimestamp()
           };
+
+
+
           console.log("Attempting to write to Firestore Database...");
+          await new Promise(res => setTimeout(res, 2000)); // wait 2 seconds
           await addDoc(collection(db, "users"), submissionData);
+          
 
           alert("Form and video submitted successfully!");
           setFormData({ firstName: "", lastName: "", email: "", age: "", dob: "", gender: "", preferredName: "" });
